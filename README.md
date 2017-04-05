@@ -3,19 +3,24 @@
 This is a Docker build of the `contrib` branch of [VATIC](https://github.com/cvondrick/vatic/tree/contrib) using the supported install script as much as possible.
 
 Github: https://github.com/jldowns/vatic-docker-contrib
+
 Dockerhub: https://hub.docker.com/r/jldowns/vatic-docker-contrib/
+
+Run using:
+```
+docker run -it -p 8080:80 -v $DATA_DIR:/home/vagrant/vagrant_data jldowns/vatic-docker-contrib:0.1
+```
 
 I've tested this container for local work only, using Docker 17.03 on MacOS Sierra.
 
 When using this software, please cite the authors:
-
 ```
 Carl Vondrick, Donald Patterson, Deva Ramanan. "Efficiently Scaling Up
 Crowdsourced Video Annotation" International Journal of Computer Vision
 (IJCV). June 2012.
 ```
 
-## Quickstart Guide
+## User Guide
 
 Create a data folder to share with Docker:
 ```
