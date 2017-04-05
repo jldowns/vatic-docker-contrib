@@ -1,0 +1,3 @@
+[submodule "vatic"]
+	path = vatic
+	url = https://github.com/jldowns/vatic.git

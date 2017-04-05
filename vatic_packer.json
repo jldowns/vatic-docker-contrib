@@ -1,0 +1,71 @@
+{
+    "variables": {
+      "docker_username": null,
+      "docker_password": null,
+      "version_number":null
+    },
+
+    "builders": [
+        {
+            "type": "docker",
+            "image": "ubuntu:trusty",
+            "commit": true,
+            "changes": [
+                "WORKDIR /home/vagrant"
+            ]
+        }
+    ],
+
+    "provisioners": [
+        {
+            "type": "shell",
+            "inline": [ "sleep 30" ]
+        },
+        {
+            "type": "shell",
+            "inline": [
+                "mkdir -p /home/vagrant",
+                "chmod 777 /home/vagrant",
+                "sed -i 's#root:/root#root:/home/vagrant#' /etc/passwd",
+                "echo '#!/bin/sh' > /usr/sbin/policy-rc.d",
+                "echo 'exit 0' >> /usr/sbin/policy-rc.d",
+                "sudo apt-get update",
+                "sudo apt-get install -y wget"
+            ]
+        },
+        {
+            "type": "file",
+            "source": "start_services.sh",
+            "destination": "/home/vagrant/start_services.sh"
+        },
+        {
+            "type": "shell",
+            "environment_vars":["INSTALL_WITH_EXAMPLE_DATA=false", "HOME=/home/vagrant"],
+            "execute_command":"/bin/bash -c 'cd /home/vagrant && {{ .Vars }} {{ .Path }}'",
+            "script": "vatic/vatic-install.sh"
+        },
+        {
+            "type": "shell",
+            "environment_vars":["HOME=/home/vagrant"],
+            "script": "finish_docker_install.sh"
+        }
+    ],
+
+
+
+    "post-processors": [
+        [
+            {
+                "type": "docker-tag",
+                "repository": "jldowns/vatic-docker-contrib",
+                "tag": "{{user `version_number`}}"
+            },
+            {
+              "type": "docker-push",
+              "login": true,
+              "login_username": "{{user `docker_username`}}",
+              "login_password": "{{user `docker_password`}}"
+            }
+        ]
+    ]
+}
