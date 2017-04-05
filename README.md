@@ -11,7 +11,7 @@ Run using:
 docker run -it -p 8080:80 -v $DATA_DIR:/home/vagrant/vagrant_data jldowns/vatic-docker-contrib:0.1
 ```
 
-I've tested this container for local work only, using Docker 17.03 on MacOS Sierra.
+*I've tested this container for local work only, using Docker 17.03 on MacOS Sierra.*
 
 When using this software, please cite the authors:
 ```
