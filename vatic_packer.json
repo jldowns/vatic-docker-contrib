@@ -66,6 +66,19 @@
               "login_username": "{{user `docker_username`}}",
               "login_password": "{{user `docker_password`}}"
             }
+        ],
+        [
+            {
+                "type": "docker-tag",
+                "repository": "jldowns/vatic-docker-contrib",
+                "tag": "latest"
+            },
+            {
+              "type": "docker-push",
+              "login": true,
+              "login_username": "{{user `docker_username`}}",
+              "login_password": "{{user `docker_password`}}"
+            }
         ]
     ]
 }

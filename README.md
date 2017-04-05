@@ -1,6 +1,9 @@
-# VATIC-DOCKER-Contrib
+# vatic-docker-contrib
 
 This is a Docker build of the `contrib` branch of [VATIC](https://github.com/cvondrick/vatic/tree/contrib) using the supported install script as much as possible.
+
+Github: https://github.com/jldowns/vatic-docker-contrib
+Dockerhub: https://hub.docker.com/r/jldowns/vatic-docker-contrib/
 
 I've tested this container for local work only, using Docker 17.03 on MacOS Sierra.
 
@@ -14,7 +17,7 @@ Crowdsourced Video Annotation" International Journal of Computer Vision
 
 ## Quickstart Guide
 
-Create a data folder to share with docker:
+Create a data folder to share with Docker:
 ```
 DATA_DIR=`pwd`/data/
 mkdir -p $DATA_DIR
@@ -25,6 +28,7 @@ Start the VATIC server using
 ```
 docker run -it -p 8080:80 -v $DATA_DIR:/home/vagrant/vagrant_data jldowns/vatic-docker-contrib:0.1
 ```
+> I highly recommend using a version tag if you plan to use this container in a project. `:latest` will always point to the latest version, and is subject to change.
 
 This should open up a shell inside the container. Start the MySQL and Apache services by executing
 ```
